@@ -216,6 +216,7 @@ a.active {
 .animal-list-container {
   margin-left: 20px;
 }
+
 .animal-list{
 	background-color: rgb(179, 26, 44);
 	color: white;
@@ -235,3 +236,17 @@ a {
 	color: lightblue;
 	text-decoration: underline;
   }
+
+.season-clock {
+	width: 30%;
+	border: 1px solid black;
+	margin-top: 10px;
+	background-color:  lightblue;
+	color: black;
+	text-align: center;
+}
+
+.toggled {
+    background-color: darkblue; /* Change this to the desired background color */
+	color: white;
+}
