@@ -1,7 +1,6 @@
 const { useState, useEffect } = React;
 
 export function SeasonClock(props) {
-  const { seasonClockData } = props;
   const [isDark, setIsDark] = useState(false);
   const [date, setDate] = useState(new Date());
 
@@ -18,19 +17,35 @@ export function SeasonClock(props) {
     return () => clearInterval(intervalId); // Clear the interval when the component unmounts
   }, []); // Empty dependency array ensures the effect runs only once when the component mounts
 
+  const month = date.toLocaleString("default", { month: "long" });
+  const day = date.toLocaleString("default", { weekday: "long" });
+  const season = getSeason(date);
 
   return (
-
     <section
       className={`season-clock ${isDark ? "toggled" : ""}`}
       onClick={handleClick}
     >
       <h1>
-        {seasonClockData.month}({seasonClockData.season})
+        {month}({season})
       </h1>
-      <img src="" alt="season" />
-      <h3>{seasonClockData.day}</h3>
+      <img src={"./assets/img/seasons/"+season.toLowerCase()+".png"} alt="season" />
+      <h3>{day}</h3>
       <p>{date.toLocaleTimeString()}</p> {/* Display the running clock */}
     </section>
   );
+}
+
+function getSeason(date) {
+  const month = date.getMonth() + 1; // Adding 1 because getMonth() returns a zero-based index
+
+  if (month >= 3 && month <= 5) {
+    return "Spring";
+  } else if (month >= 6 && month <= 8) {
+    return "Summer";
+  } else if (month >= 9 && month <= 11) {
+    return "Autumn";
+  } else {
+    return "Winter";
+  }
 }

@@ -10,12 +10,6 @@ const animalData = [
     { type: 'Fin Whale', count: 28 },
 ];
 
-const seasonClockData = {
-    month: "December",
-    season: "Winter",
-    day: "Tuesday"
-}
-
 export function RootCmp() {
     return (
         <section className="app main-layout">
@@ -23,7 +17,7 @@ export function RootCmp() {
             <main>
                 <main>
                     <AnimalList animalData={animalData} />
-                    <SeasonClock seasonClockData={seasonClockData} />
+                    <SeasonClock/>
                 </main>
             </main>
         </section>
