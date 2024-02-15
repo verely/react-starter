@@ -212,3 +212,26 @@ a.active {
 		color: var(--clr2bg-light);
 	}
 }
+
+.animal-list-container {
+  margin-left: 20px;
+}
+.animal-list{
+	background-color: rgb(179, 26, 44);
+	color: white;
+}
+
+.animal-table {
+	border-collapse:  collapse;
+	width: 40%;
+}
+
+td {
+	padding: 8px;
+	border: 1px solid black;
+}
+
+a {
+	color: lightblue;
+	text-decoration: underline;
+  }
