@@ -37,7 +37,7 @@ export function SeasonClock(props) {
 }
 
 function getSeason(date) {
-  const month = date.getMonth() + 1; // Adding 1 because getMonth() returns a zero-based index
+  const month = date.getMonth() + 1;
 
   if (month >= 3 && month <= 5) {
     return "Spring";
@@ -48,4 +48,24 @@ function getSeason(date) {
   } else {
     return "Winter";
   }
+
+//   switch (month) {
+//     case(12):
+//     case(1):
+//     case(2):
+//       "Winter";
+//       break;
+//     case(3):
+//     case(4):
+//     case(5):
+//       "Spring";
+//       break;
+//     case(6):
+//     case(7):
+//     case(8):
+//       "Summer";
+//       break;
+//     default:
+//       "Autumn";
+//   }
 }
