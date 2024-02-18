@@ -4,9 +4,8 @@ export function SeasonClock(props) {
   const [isDark, setIsDark] = useState(false);
   const [date, setDate] = useState(new Date());
 
-  const handleClick = () => {
+  const onToggleDark = () => {
     setIsDark(!isDark);
-    //console.log("isToggled:" + isDark);
   };
 
   useEffect(() => {
@@ -23,8 +22,8 @@ export function SeasonClock(props) {
 
   return (
     <section
-      className={`season-clock ${isDark ? "toggled" : ""}`}
-      onClick={handleClick}
+      className={`season-clock ${isDark ? "dark" : ""}`}
+      onClick={onToggleDark}
     >
       <h1>
         {month}({season})
@@ -48,24 +47,4 @@ function getSeason(date) {
   } else {
     return "Winter";
   }
-
-//   switch (month) {
-//     case(12):
-//     case(1):
-//     case(2):
-//       "Winter";
-//       break;
-//     case(3):
-//     case(4):
-//     case(5):
-//       "Spring";
-//       break;
-//     case(6):
-//     case(7):
-//     case(8):
-//       "Summer";
-//       break;
-//     default:
-//       "Autumn";
-//   }
 }

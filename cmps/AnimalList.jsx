@@ -1,7 +1,4 @@
-const { useState, useEffect } = React;
-
-export function AnimalList(props) {
-  const { animalData } = props;
+export function AnimalList({animalData}) {
   const searchQuery = "https://www.google.com/search?q=";
   return (
     <section className="animal-list">
@@ -14,14 +11,13 @@ export function AnimalList(props) {
                   <td>{animal.type}</td>
                   <td>{animal.count}</td>
                   <td>
-                      <a href={searchQuery + animal.type}>search</a>
+                      <a target="_blank" href={searchQuery + animal.type}>search</a>
                   </td>
               </tr>
               ))}
           </tbody>
         </table>
       </div>
-
     </section>
   );
 }

@@ -246,7 +246,7 @@ a {
 	text-align: center;
 }
 
-.toggled {
+.dark {
     background-color: darkblue; /* Change this to the desired background color */
 	color: white;
 }
