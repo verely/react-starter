@@ -250,3 +250,27 @@ a {
     background-color: darkblue; /* Change this to the desired background color */
 	color: white;
 }
+
+.watcher-app{
+	background-color: rgba(241, 226, 206, 0.833);
+	text-align: center;
+	height: 100%;
+	padding:  20px;
+}
+
+.watcher-preview-container{
+	display: flex;
+	gap: 10px;
+	text-align: center;
+}
+
+.watcher-preview {
+	background-color: white;
+	text-align: center;
+}
+
+.hr-watcher-preview{
+	width: 50%;
+	margin-left: 10;
+
+}
