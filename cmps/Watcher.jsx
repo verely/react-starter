@@ -12,11 +12,27 @@ export function Watcher() {
     const [watchers, setWatchers] = useState([])
     const [selectedWatcher, setSelectedWatcher] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editableName, setEditableName] = useState('');
 
     useEffect(()=>{
         watcherService.getWatchers()
         .then(setWatchers)
     },[])
+
+
+    function onWatcherRename(newName) {
+        if (selectedWatcher) {
+            const updatedWatcher = { ...selectedWatcher, fullname: newName };
+            watcherService.save(updatedWatcher)
+                .then(() => {
+                    renderWatchers();
+                    setIsModalOpen(false); // Close the modal after renaming
+                })
+                .catch(err => {
+                    console.log('Had issues with', err);
+                });
+        }
+    }
 
     function onWatcherSelect(watcher) {
         setSelectedWatcher(watcher);
@@ -73,11 +89,18 @@ export function Watcher() {
                 <div className="modal">
                     <div className="modal-content">
                         <h2>{selectedWatcher && selectedWatcher.fullname}</h2>
+                        <input
+                                type="text"
+                                value={editableName}
+                                onChange={e => setEditableName(e.target.value)}
+                                placeholder="Enter new name"
+                            />
                         <ul>
                             {selectedWatcher && selectedWatcher.movies.map((movie, index) => (
                                 <li key={index}>{movie}</li>
                             ))}
                         </ul>
+                        <button onClick={() => onWatcherRename(editableName)}>Rename</button>
                         <button onClick={onModalClose}>Close</button>
                     </div>
                 </div>

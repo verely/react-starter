@@ -10,6 +10,7 @@ export const watcherService = {
     remove,
     addWatcher,
     getWatchers,
+    save,
 }
 // For Debug (easy access from console):
 // window.cs = watcherService
