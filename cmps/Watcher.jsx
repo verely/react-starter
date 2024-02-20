@@ -11,11 +11,22 @@ export function Watcher() {
     // ])
     const [watchers, setWatchers] = useState([])
     const [selectedWatcher, setSelectedWatcher] = useState(null)
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(()=>{
         watcherService.getWatchers()
         .then(setWatchers)
     },[])
+
+    function onWatcherSelect(watcher) {
+        setSelectedWatcher(watcher);
+        setIsModalOpen(true);
+    }
+
+    function onModalClose() {
+        setIsModalOpen(false);
+        setSelectedWatcher(null);
+    }
 
     async function renderWatchers() {
        const watchers = await watcherService.getWatchers();
@@ -35,15 +46,42 @@ export function Watcher() {
         }
     }
 
+    async function onWatcherRemove(watcherId) {
+        try {
+            await watcherService.remove(watcherId);
+            renderWatchers();
+        } catch (err) {
+            console.log('Had issues with', err);
+        }
+    }
+
     return (
         <div className="watcher-app">
             <h2>Watcher App</h2>
             <button onClick={onAddWatcher}>Add watcher</button>
             <div className="watcher-preview-container">
                 {watchers.map((watcher, index) => (
-                                <WatcherPreview key={index} watcher={watcher}/>
+                                <WatcherPreview
+                                    key={index}
+                                    watcher={watcher}
+                                    onWatcherSelect={() => onWatcherSelect(watcher)}
+                                    onWatcherRemove={() => onWatcherRemove(watcher.id)}
+                                />
                             ))}
             </div>
+            {isModalOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h2>{selectedWatcher && selectedWatcher.fullname}</h2>
+                        <ul>
+                            {selectedWatcher && selectedWatcher.movies.map((movie, index) => (
+                                <li key={index}>{movie}</li>
+                            ))}
+                        </ul>
+                        <button onClick={onModalClose}>Close</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
