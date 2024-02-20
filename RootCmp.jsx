@@ -5,6 +5,7 @@ import { AnimalList } from "./cmps/AnimalList.jsx"
 import { SeasonClock } from "./cmps/SeasonClock.jsx"
 import { CountDown } from "./cmps/CountDown.jsx"
 import { Watcher } from "./cmps/Watcher.jsx"
+import { MouseMonitor } from "./cmps/MouseMonitor.jsx"
 
 const animalData = [
     { type: 'Malayan Tiger', count: 787 },
@@ -24,6 +25,7 @@ export function RootCmp() {
                         console.log('Done!');
                     }}/>
                     <Watcher/>
+                    <MouseMonitor/>
                 </main>
             </main>
         </section>

@@ -253,6 +253,7 @@ a {
 
 .watcher-app{
 	background-color: rgba(241, 226, 206, 0.833);
+	width: 80%;
 	text-align: center;
 	height: 100%;
 	padding:  20px;
@@ -304,4 +305,17 @@ a {
 
 .modal-content ul {
 	text-align: left;
+}
+
+.mouse-monitor{
+	background-color: black;
+	color: white;
+	width:  80%;
+    max-width:  180px;
+	padding:  10px;
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	margin: 0;
 }
