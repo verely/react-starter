@@ -4,19 +4,21 @@ import { WatcherPreview } from "./WatcherPreview.jsx"
 import  { watcherService } from "../services/watcher.service.js"
 
 export function Watcher() {
-    // const [watchers, setWatchers] = useState([
-    //     {id: 'w101', fullname: 'n101', movies: ['Rambo','Rocky']},
-    //     {id: 'w102', fullname: 'n102', movies: ['Rambo2','Rocky2']},
-    //     {id: 'w103', fullname: 'n103', movies: ['Rambo3','Rocky3']},
-    // ])
     const [watchers, setWatchers] = useState([])
     const [selectedWatcher, setSelectedWatcher] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editableName, setEditableName] = useState('');
 
     useEffect(()=>{
-        watcherService.getWatchers()
-        .then(setWatchers)
+        const fetchWatchers = async () => {
+            try {
+                const watchers = await watcherService.getWatchers()
+                setWatchers(watchers)
+            } catch (err) {
+                console.error('Failed to fetch watchers:', err)
+            }
+        }
+        fetchWatchers()
     },[])
 
 
@@ -26,7 +28,7 @@ export function Watcher() {
             watcherService.save(updatedWatcher)
                 .then(() => {
                     renderWatchers();
-                    setIsModalOpen(false); // Close the modal after renaming
+                    setIsModalOpen(false);
                 })
                 .catch(err => {
                     console.log('Had issues with', err);
@@ -54,7 +56,7 @@ export function Watcher() {
         try {
             const fullname = prompt('full name?')
             if (fullname && fullname.length>1){
-                const watcher = await watcherService.addWatcher(fullname)
+                await watcherService.addWatcher(fullname)
                 renderWatchers()
             }
         } catch (err) {
