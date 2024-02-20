@@ -22,17 +22,16 @@ export function Watcher() {
     },[])
 
 
-    function onWatcherRename(newName) {
+    async function onWatcherRename(newName) {
         if (selectedWatcher) {
             const updatedWatcher = { ...selectedWatcher, fullname: newName };
-            watcherService.save(updatedWatcher)
-                .then(() => {
-                    renderWatchers();
-                    setIsModalOpen(false);
-                })
-                .catch(err => {
-                    console.log('Had issues with', err);
-                });
+            try {
+                await watcherService.save(updatedWatcher)
+                renderWatchers();
+                setIsModalOpen(false);
+            } catch (err) {
+                console.log('Had issues with', err);
+            }
         }
     }
 
