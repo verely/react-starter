@@ -4,10 +4,6 @@ export function SeasonClock(props) {
   const [isDark, setIsDark] = useState(false);
   const [date, setDate] = useState(new Date());
 
-  const onToggleDark = () => {
-    setIsDark(!isDark);
-  };
-
   useEffect(() => {
     const intervalId = setInterval(() => {
       setDate(new Date());
@@ -15,6 +11,9 @@ export function SeasonClock(props) {
 
     return () => clearInterval(intervalId); // Clear the interval when the component unmounts
   }, []); // Empty dependency array ensures the effect runs only once when the component mounts
+  const onToggleDark = () => {
+    setIsDark(!isDark);
+  };
 
   const month = date.toLocaleString("default", { month: "long" });
   const day = date.toLocaleString("default", { weekday: "long" });
